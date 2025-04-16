@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 // AccelerateHeader
 
-const Accelerate = () => {
+const Developer = () => {
 
   const [formOpen, setFormOpen] = useState(false);
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const Accelerate = () => {
   return (
     <div>
       {/* <div className='w-full  overflow-hidden'>
-        <AccelerateHeader/>
+        <DeveloperHeader/>
       </div> */}
       <button
         onClick={() => setFormOpen(true)}
@@ -55,4 +55,4 @@ const Accelerate = () => {
   )
 }
 
-export default Accelerate;
+export default Developer;

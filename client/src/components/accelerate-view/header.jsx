@@ -9,20 +9,23 @@ import { RiUserShared2Fill } from "react-icons/ri";
 import CarouselComponent from './carousel';
 import { Outlet } from 'react-router-dom';
 
-const AccelerateHeader = () => {
+const AccelerateHeader = ({screen}) => {
 
   const {user} = useSelector((state)=>state.auth);
   // console.log("Accelerate Module",user);
   const [active,setActive] = useState("");
+  // screen(1)
 
   useEffect(()=>{
     setActive(user?.role);
-    console.log("Role",active);
+    // console.log("Role",active);
   },user);
 
   // if(isLoading) {
   //   return <></>
   // }
+
+  // console.log(screen);
   return (
     <div className='custom-bg w-full flex flex-col items-center justify-center h-screen relative'>
 
@@ -37,11 +40,11 @@ const AccelerateHeader = () => {
       </div>
 
       {/* Overlay Content */}
-      <div className='absolute inset-0 z-20 flex items-center justify-center pointer-events-none -top-40 font-poppins '>
+      <div className='absolute inset-0 z-50 flex items-center justify-center  -top-40 font-poppins '>
         <div className="text-white text-center space-y-4 flex flex-col gap-5">
           <h2 className="text-4xl font-semibold">Accelerate your Impact</h2>
           <div className='flex w-full items-center justify-center gap-3 '>
-            <div className='flex flex-col '>
+            <div className='flex flex-col z-20 cursor-pointer' onClick={()=>screen(0)}>
               <div className='w-30 px-6 py-3 rounded-3xl bg-sub_btn flex items-center justify-center gap-2'>
                   <FaUser />
                   <h2>Subscriber</h2>
@@ -57,7 +60,7 @@ const AccelerateHeader = () => {
                 }
             </div>
 
-            <div className='flex flex-col hover:translate-x-4 w-full h-full'>
+            <div className='flex flex-col w-full h-full cursor-pointer' onClick={()=>screen(1)}>
               <div className='w-30 px-6 py-3 rounded-3xl bg-dev_btn flex items-center justify-center gap-2'>
                   <FaCode />
                   <h2>Developer</h2>
@@ -73,7 +76,7 @@ const AccelerateHeader = () => {
                 }
             </div>
 
-            <div className='flex flex-col'>
+            <div className='flex flex-col cursor-pointer' onClick={()=>screen(2)}>
               <div className='w-30 px-6 py-3 rounded-3xl bg-col_btn flex items-center justify-center gap-2'>
                 <RiUserShared2Fill />
                   <h2>Contributor</h2>

@@ -10,18 +10,19 @@ import {
 
 const platformStyles = {
   WhatsApp: {
-    color: "bg-green-500",
+    color: "bg-green-700", // darker green
     icon: <FaWhatsapp size={13} />,
   },
   Slack: {
-    color: "bg-pink-500",
+    color: "bg-pink-700", // deeper pink/magenta
     icon: <FaSlack size={13} />,
   },
   Discord: {
-    color: "bg-indigo-600",
+    color: "bg-indigo-800", // rich deep indigo
     icon: <FaDiscord size={13} />,
   },
 };
+
 
 const descriptionsByHeight = {
   short: "Create. Connect. Grow.",
@@ -93,6 +94,27 @@ const cards = [
     learnWithFriends: { title: "Workout Buddies" },
     shareWork: { title: "Progress Pics" },
   },
+  {
+    title: "FBA Sellers Group",
+    platform: "WhatsApp",
+    price: 150,
+    learnWithFriends: { title: "Seller Roundtables" },
+    shareWork: { title: "Success Stories" },
+  },
+  {
+    title: "Fitness Gang",
+    platform: "Discord",
+    price: 39.99,
+    learnWithFriends: { title: "Workout Buddies" },
+    shareWork: { title: "Progress Pics" },
+  },
+  {
+    title: "Creative Space",
+    platform: "Slack",
+    price: 15,
+    learnWithFriends: { title: "Creative Jams" },
+    shareWork: { title: "Publish Together" },
+  }
 ];
 
 export default function CarouselComponent() {
@@ -100,13 +122,14 @@ export default function CarouselComponent() {
 
   const heights = ["h-[270px]", "h-[330px]", "h-[310px]", "h-[290px]"];
   const colors = [
-    "bg-gradient-to-b from-white to-[#e0f7ff]",
-    "bg-gradient-to-b from-[#fceaff] to-[#f9e3ff]",
-    "bg-gradient-to-b from-[#fff8e1] to-[#ffeaa7]",
-    "bg-gradient-to-b from-white to-[#f1f1f1]",
-    "bg-gradient-to-b from-white to-[#fff0f0]",
-    "bg-gradient-to-b from-white to-[#e6ffe6]",
+    "bg-gradient-to-b from-[#dfe9f3] to-[#ffffff]", // Light gray-blue to white (clean, modern)
+    "bg-gradient-to-b from-[#cfd9df] to-[#e2ebf0]", // Soft steel gray to misty blue
+    "bg-gradient-to-b from-[#e6e9f0] to-[#eef1f5]", // Subtle blue-gray gradient (neutral and calm)
+    "bg-gradient-to-b from-[#d4d3dd] to-[#efefef]", // Muted lilac gray to white (subtle polish)
+    "bg-gradient-to-b from-[#dde1e7] to-[#f7f8f9]", // Classic grayish-silver tone
+    "bg-gradient-to-b from-[#c8d0d8] to-[#e6ecf1]", // Cool gray with slight blue tint (tech-corporate vibe)
   ];
+  
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -139,7 +162,7 @@ export default function CarouselComponent() {
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         <motion.div
-          className="flex gap-4 px-10 py-10 items-center"
+          className="flex gap-2 px-10 py-10 items-center"
           drag="x"
           dragConstraints={{ left: -1000, right: 0 }}
           whileTap={{ cursor: "grabbing" }}
@@ -155,7 +178,7 @@ export default function CarouselComponent() {
             return (
               <motion.div
                 key={i}
-                className={`min-w-[200px] max-w-[150px] ${height} px-6 py-5 rounded-xl ${bgColor} shadow-xl text-center text-wrap text-gray-800 flex flex-col gap-1 items-center justify-center transition-all duration-300`}
+                className={`min-w-[200px] max-w-[150px] ${height} px-6 py-5 rounded-[.7rem] ${bgColor} shadow-xl text-center text-wrap text-gray-800 flex flex-col gap-1 items-center justify-center transition-all duration-300`}
                 whileHover={{ scale: 1.05 }}
                 initial={{ opacity: 0.7, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -178,7 +201,7 @@ export default function CarouselComponent() {
                   </p>
                   <div className="flex items-center justify-center gap-2 mt-1">
                     <span
-                      className={`text-white ${platform.color} px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1`}
+                      className={`text-white ${platform.color} px-5 py-1 rounded-full text-[.5rem] font-medium flex items-center gap-1`}
                     >
                       {platform.icon} {card.platform}
                     </span>
@@ -205,7 +228,7 @@ export default function CarouselComponent() {
                 </div>
 
                 <button
-                  className={`${platform.color} hover:brightness-110 text-white text-xs py-2 rounded-full w-full font-medium text-nowrap`}
+                  className={`${platform.color} hover:brightness-110 text-white text-[.6rem] py-2 text-center rounded-full w-full font-medium text-nowrap`}
                 >
                   Subscribe • ${card.price}/month
                 </button>
