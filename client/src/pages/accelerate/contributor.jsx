@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { submitDeveloper } from "@/store/dev-slice";
 import { toast } from "react-toastify";
 import DeveloperForm from "@/components/accelerate-view/developerForm";
+import { updateUserProfile } from "@/store/auth-slice";
 
 
 const Contributor = () => {
@@ -30,30 +31,25 @@ const Contributor = () => {
   const [profileHovered, setProfileHovered] = useState(false);
   const [fundHovered, setFundHovered] = useState(false);
   const [locationHovered, setLocationHovered] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
 
   const dispatch = useDispatch();
   const {user} = useSelector((state)=>state.auth);
 
-  const handleFormSubmit = (data) => {
-    console.log("Raw form data:", data);
+  const handleFormSubmit = () => {
+    console.log("Raw form data:", user);
   
-    if (user && user?.role!=="developer") {
-      const transformedData = {
-        userId: user._id,
-        domain: data.domains,
-        techStack: data.techStack,
-        repoLink: [ 
-          data.repo1,
-          data.repo2,
-        ],
-      };
-  
-      console.log("Transformed data:", transformedData);
-      dispatch(submitDeveloper(transformedData))
+    if (user && user?.role!=="contributor") {
+      const updatedUser = { ...user, role: "contributor" };
+      // console.log(updatedUser);
+      dispatch(updateUserProfile(updatedUser))
         .then(() => console.log("Success"))
         .catch((error) => console.log(error));
+      toast.success("Congradulations ! you're on Contributor mode start contributing");
+      setFormOpen(false);
     }else {
-      toast.success("You're Already in Developer mode!!");
+      toast.success("You're Already in Contributor mode!!");
+      setFormOpen(false);
     }
   };
 
@@ -182,11 +178,52 @@ const Contributor = () => {
           >
             Join now
           </button>
-          <DeveloperForm
-            isOpen={formOpen}
-            onClose={() => setFormOpen(false)}
-            onSubmit={handleFormSubmit}
-          />
+          {formOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 rounded-lg font-poppins">
+              <div className="bg-white rounded-lg p-6 max-w-sm w-full shadow-lg">
+                <h3 className="text-xl font-semibold mb-4">Confirm your action</h3>
+                <div className="flex flex-col items-start gap-2 mb-4">
+                  <p className="text-[1rem]">Join Motren's Contributor Forum Where you will, <br /> <span className="text-blue-600">Collborate people <br />refere people and developer <br />earn rewards - Make Impact</span> </p>
+                  <div className="flex items-center justify-center gap-3">
+                    <input
+                      type="checkbox"
+                      id="confirm"
+                      checked={confirmed}
+                      onChange={() => setConfirmed(!confirmed)}
+                      className="mt-1"
+                    />
+                    <label htmlFor="confirm" className="text-gray-700 text-[.6rem] mt-2">
+                      by this I confirm I want to join and collaborate on Motren by following all the guidelines 
+                    </label>
+                  </div>
+                  
+                </div>
+                <div className="flex justify-end gap-2">
+                  <button
+                    onClick={() => setFormOpen(false)}
+                    className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    disabled={!confirmed}
+                    onClick={() => {
+                      // Your join logic here
+                      handleFormSubmit()
+                      // alert("Joined successfully!");
+                    }}
+                    className={`px-4 py-2 rounded text-white ${
+                      confirmed ? "bg-blue-500 hover:bg-blue-600" : "bg-blue-300 cursor-not-allowed"
+                    }`}
+                  >
+                    Confirm & Join
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          
 
         </div>
       </div>
