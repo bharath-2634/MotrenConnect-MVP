@@ -18,8 +18,9 @@ const AccelerateHeader = ({screen}) => {
 
   useEffect(()=>{
     setActive(user?.role);
-    // console.log("Role",active);
-  },user);
+    console.log("Role",active);
+    
+  },[]);
 
   // if(isLoading) {
   //   return <></>

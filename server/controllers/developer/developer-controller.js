@@ -1,6 +1,6 @@
+const axios = require("axios");
 const Developer = require("../../models/Developer");
 
-// Controller to handle creation of a Developer
 const createDeveloper = async (req, res) => {
   try {
     const {
@@ -10,11 +10,13 @@ const createDeveloper = async (req, res) => {
       repoLink,
     } = req.body;
 
+    // Prevent duplicate entry
     const existingDeveloper = await Developer.findOne({ userId });
     if (existingDeveloper) {
       return res.status(400).json({ message: "Developer already submitted!" });
     }
 
+    // Save new developer
     const newDeveloper = new Developer({
       userId,
       domain,
@@ -24,10 +26,20 @@ const createDeveloper = async (req, res) => {
 
     await newDeveloper.save();
 
+    // Step 1: Call ML model with ObjectId
+    const mlResponse = await axios.get(
+      `https://profileverification-motren-ai.onrender.com/classify?developer_id=${newDeveloper._id}`
+    );
+    
+
+    console.log("MlResponse",mlResponse);
+    // Step 2: Return both DB and ML response
     res.status(201).json({
-      message: "Developer details submitted successfully!",
+      message: "Developer submitted successfully!",
       data: newDeveloper,
+      mlResult: mlResponse.data
     });
+
   } catch (error) {
     console.error("Error submitting developer details:", error);
     res.status(500).json({ message: "Server error", error });
