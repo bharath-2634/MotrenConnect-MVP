@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const authRouter = require('./routers/auth/auth-router');
 const devRouter = require('./routers/developer/developer-router');
+const conRouter = require('./routers/contributor/contributor-router');
 
 mongoose
   .connect("mongodb+srv://bharath2005:bharath2005@cluster0.0vibjmv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
@@ -36,6 +37,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use('/api/auth',authRouter);
 app.use('/api/developerEnroll',devRouter);
+app.use('/api/contributorEnroll',conRouter);
 
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));

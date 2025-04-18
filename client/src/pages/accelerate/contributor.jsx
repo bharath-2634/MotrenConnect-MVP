@@ -21,6 +21,7 @@ import { submitDeveloper } from "@/store/dev-slice";
 import { toast } from "react-toastify";
 import DeveloperForm from "@/components/accelerate-view/developerForm";
 import { updateUserProfile } from "@/store/auth-slice";
+import { submitContributor } from "@/store/con-slice";
 
 
 const Contributor = () => {
@@ -45,6 +46,8 @@ const Contributor = () => {
       dispatch(updateUserProfile(updatedUser))
         .then(() => console.log("Success"))
         .catch((error) => console.log(error));
+      
+      dispatch(submitContributor({userId : user._id})).then(()=>console.log("Contributor Schema created and updated")).catch((error)=>console.log(error))
       toast.success("Congradulations ! you're on Contributor mode start contributing");
       setFormOpen(false);
     }else {

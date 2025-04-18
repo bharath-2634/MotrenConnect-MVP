@@ -99,7 +99,7 @@ const AccelerateHeader = ({screen}) => {
 
       <div className="absolute -bottom-40 z-10 w-[90rem] flex items-center justify-center">
         <div className="w-full opacity-90">
-          <CarouselComponent />
+          {/* <CarouselComponent /> */}
         </div>
       </div>
     </div>
