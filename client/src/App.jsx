@@ -15,6 +15,7 @@ import ProfileLayout from './components/profile-view/layout'
 import BasicInfo from './components/profile-view/basicInfo'
 // import Accelerate from './pages/accelerate/accelerate'
 import AccelerateLayout from './components/accelerate-view/layout'
+import Events from './pages/events/events'
 // import Accelerate from './pages/accelerate/accelerate'
 
 
@@ -58,6 +59,7 @@ const App = () => {
                           }>
               <Route path='home' element={<Home/>}/>
               <Route path='accelerate' element={<AccelerateLayout/>}/>
+              <Route path='event' element={<Events/>}/>
           </Route>
 
           <Route path='/profile' element={<CheckAuth isAuthenticated={isAuthenticated} user={user}>

@@ -93,8 +93,7 @@ const AccelerateHeader = ({screen}) => {
             </div>
               
           </div>
-        </div>
-        
+        </div> 
       </div>
 
       <div className="absolute -bottom-40 z-10 w-[90rem] flex items-center justify-center">

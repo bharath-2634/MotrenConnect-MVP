@@ -14,7 +14,7 @@ const BottomNav = () => {
 
   const navItems = [
     { name: "Home", icon: <FaHome />, id: "/main/home" },
-    { name: "Event", icon: <MdEvent />, id: "event" },
+    { name: "Event", icon: <MdEvent />, id: "/main/event" },
     { name: "Accelerate", icon: <MdRocketLaunch />, id: "/main/accelerate" },
     { name: "Search", icon: <FaSearch />, id: "search" },
     { name: "Dashboard", icon: <FaUser />, id: "profile" },
