@@ -26,11 +26,13 @@ const createDeveloper = async (req, res) => {
 
     await newDeveloper.save();
 
+    console.log(newDeveloper._id);
     // Step 1: Call ML model with ObjectId
     const mlResponse = await axios.get(
       `https://profileverification-motren-ai.onrender.com/classify?developer_id=${newDeveloper._id}`
     );
     
+
 
     console.log("MlResponse",mlResponse);
     // Step 2: Return both DB and ML response
