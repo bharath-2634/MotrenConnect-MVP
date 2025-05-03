@@ -26,6 +26,7 @@ import event1 from "../../assets/event1.png";
 import pongal from "../../assets/pongal.png"
 import PaymentPopUp from '@/components/event-view/paymentPopUp';
 import { updateUserProfile } from '@/store/auth-slice';
+import noEvent from "../../assets/noEvents.gif";
 
 
 const Events = () => {
@@ -52,7 +53,13 @@ const Events = () => {
     useEffect(()=>{
         dispatch(fetchActiveEvent()).then((data)=>setEventData(data.payload)).catch((error)=>console.log(error));
         // console.log("EventData: "+JSON.stringify(eventData,null,2));
+
+        if(!eventData) {
+          console.log("No event Data found !");
+        }
     },[]);
+
+    
 
     const getDaysRemaining = () => {
         if (!eventData?.eventDate) return null;
@@ -138,10 +145,6 @@ const Events = () => {
       console.log(user?.profile?.eventCount);
     };
     
-    
-    
-    
-
   return (
     <div className='w-full flex flex-col items-center justify-center gap-4 p-4 font-poppins'>
         <BottomNav/>
@@ -150,8 +153,15 @@ const Events = () => {
             <FaChevronLeft onClick={()=>history.back()} className='text-white '/>
         </div>
 
+        {
+          eventData==="No active event found" && 
+          <div className='flex flex-col w-full items-center justify-center gap-0 p-6'>
+            <img src={noEvent} alt="MotrenConnect" className='w-[15rem]'/>
+            <h2 className='text-white'>No event active now ! stay active</h2>
+          </div>
+        }
         {/* Main Event Card */}
-        <div className='w-[90%] bg-primary_box rounded flex items-center justify-center gap-10 p-3 mt-10'>
+        { eventData!="No active event found" && <div className='w-[90%] bg-primary_box rounded flex items-center justify-center gap-10 p-3 mt-10'>
             {/* Image Gallary */}
             <div className=''>
                 <ImageSlider images={images}/>
@@ -213,9 +223,9 @@ const Events = () => {
                 <PaymentPopUp isOpen={showPopup} onClose={handlePopupClose}/>
 
             </div>
-        </div>
+        </div>}
         {/* Sub Event Card */}
-        <div className='w-[90%] flex items-center justify-between gap-3'>
+        {eventData!="No active event found" && <div className='w-[90%] flex items-center justify-between gap-3'>
             <div className='w-full bg-primary_box rounded flex flex-col items-center justify-center gap-4 mt-5 p-4'>
                 <h2 className='text-white text-start w-full'>About The Event</h2>
                 <p className='text-gray-400 text-[.8rem]'>Join us for cozy, homely events that are designed to bring the warmth of family gatherings to our friends. Our events bring people together and make lasting memories over amazing conversations. We can't wait to see you there!
@@ -259,7 +269,7 @@ const Events = () => {
                 <button className='w-full rounded px-6 py-2 bg-primary_button text-white justify-end' onClick={()=>setShowPopup(true)}>Fund now!</button>
                 <PaymentPopUp isOpen={showPopup} onClose={handlePopupClose}/>
             </div>
-        </div>
+        </div>}
 
         {/* Down the Ground Actual Implementation */}
         <div className='flex flex-col w-full items-center justify-center gap-5 p-6'>
