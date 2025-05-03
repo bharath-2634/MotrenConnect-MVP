@@ -17,7 +17,7 @@ const BottomNav = () => {
     { name: "Event", icon: <MdEvent />, id: "/main/event" },
     { name: "Accelerate", icon: <MdRocketLaunch />, id: "/main/accelerate" },
     { name: "Search", icon: <FaSearch />, id: "search" },
-    { name: "Dashboard", icon: <FaUser />, id: "profile" },
+    { name: "Dashboard", icon: <FaUser />, id: "/main/dashboard" },
   ];
 
   const handleSearchClick = () => {
@@ -40,7 +40,7 @@ const BottomNav = () => {
         {searchMode ? (
           <div className="flex items-center w-full gap-2 relative">
             <button
-              className="text-white text-xl absolute right-1 top-2"
+              className="text-white text-xl absolute right-1 top-3.5"
               onClick={exitSearchMode}
             >
               <MdCancel />

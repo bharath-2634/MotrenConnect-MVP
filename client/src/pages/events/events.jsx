@@ -3,7 +3,7 @@ import BottomNav from '@/components/common/header';
 import { fetchActiveEvent } from '@/store/event-slice';
 import React, { useEffect, useState } from 'react'
 import { FaChevronLeft } from "react-icons/fa";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import img1 from "../../assets/orhpan_main_img_1.jpg";
 import img2 from "../../assets/orphan_main_img_2.jpg";
 import img3 from "../../assets/orphan_main_img_3.jpg";
@@ -24,6 +24,8 @@ import birthday1 from "../../assets/birthday1.png";
 import event from "../../assets/event.png";
 import event1 from "../../assets/event1.png";
 import pongal from "../../assets/pongal.png"
+import PaymentPopUp from '@/components/event-view/paymentPopUp';
+import { updateUserProfile } from '@/store/auth-slice';
 
 
 const Events = () => {
@@ -36,13 +38,20 @@ const Events = () => {
         img1,img2,img3,img4,img5
     ]
 
+    // const [stepAtClose,setStepAtClose] = useState(false)
+
     const dispatch = useDispatch();
 
     const [eventData,setEventData] = useState();
+    const [showPopup, setShowPopup] = useState(false);
+
+    useEffect(()=>{
+      console.log(showPopup);
+    },[]);
 
     useEffect(()=>{
         dispatch(fetchActiveEvent()).then((data)=>setEventData(data.payload)).catch((error)=>console.log(error));
-        console.log("EventData: "+JSON.stringify(eventData,null,2));
+        // console.log("EventData: "+JSON.stringify(eventData,null,2));
     },[]);
 
     const getDaysRemaining = () => {
@@ -71,7 +80,66 @@ const Events = () => {
             "As college students, we spent a heartwarming day at the orphanage, sharing laughter, stories, and joy with the kids. It was a day filled with meaningful connections, playful moments, and memories we'll cherish forever.",
           video: video1,
         },
-      ];
+    ];
+
+    const openMap = () => {
+      // Get user location
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const userLocation = `${latitude},${longitude}`;
+          const targetLocation = eventData?.eventLocation;
+          const mapUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLocation}&destination=${encodeURIComponent(targetLocation)}`;
+          window.open(mapUrl, "_blank");
+        },
+        (error) => {
+          // If user denies location access or fails, just show destination
+          const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(targetLocation)}`;
+          window.open(mapUrl, "_blank");
+        }
+      );
+    };
+
+    const { user, isAuthenticated, isLoading }  = useSelector((state)=>state.auth);
+    // console.log("user",user);
+    
+    // const handleGratitudeComplete = () => {
+      // const updatedUser = {
+      //   ...user,
+      //   profile :{
+      //     ...user?.profile,
+      //     envelope : [...(user?.profile?.envelope || []),3],
+      //     eventCount : user?.profile?.eventCount+1,
+      //     fundGrade : user?.profile?.fundGrade+100,
+      //     points : user?.profile?.points+30
+      //   }
+      // };
+      // console.log("Updated User Profile",updatedUser);
+      // dispatch(updateUserProfile(updatedUser));
+    // };
+
+    const handlePopupClose = (stepAtClose) => {
+      console.log("step",stepAtClose);
+      setShowPopup(false)
+      if (stepAtClose === "thanks") {
+        const updatedUser = {
+          ...user,
+          profile: {
+            ...user?.profile,
+            envelope: [...(user?.profile?.envelope || []), 3],
+            eventCount: (user?.profile?.eventCount || 0) + 1,
+            fundGrade: (user?.profile?.fundGrade || 0) + 100,
+            points: (user?.profile?.points || 0) + 30,
+          },
+        };
+        dispatch(updateUserProfile(updatedUser));
+      }
+      
+      console.log(user?.profile?.eventCount);
+    };
+    
+    
+    
     
 
   return (
@@ -93,7 +161,7 @@ const Events = () => {
                 <p className='text-[1rem] text-gray-400'>{eventData?.eventDescription}</p>
                 <div className='flex items-center justify-between gap-3 mt-3 w-full'>
                     <p className='flex items-center gap-3 text-white'><span><MdLocationPin className='text-red-600'/></span> {eventData?.eventLocation}</p>
-                    <button className='rounded px-6 py-2 bg-primary_button text-white justify-end'>Open Map</button>
+                    <button className='rounded px-6 py-2 bg-primary_button text-white justify-end' onClick={()=>openMap()}>Open Map</button>
                 </div>
                 {/* Progress Bar */}
                 <div className="w-full flex flex-col gap-2 mt-4">
@@ -120,15 +188,16 @@ const Events = () => {
                     </div>
                 </div>
                 {/* Last section */}
-                <div className='w-full flex items-center justify-between gap-4 mt-5'>
-                    <div className='flex flex-col items-start justify-start gap-3'>
-                        <div className='flex items-center gap-3 text-white'>
+                <div className='w-full flex items-center justify-between gap-4 mt-5'  onClick={() => setShowPopup(true)}>
+                    <div className='flex flex-col items-start justify-start gap-3' onClick={() => console.log("Clicked")}>
+                        <div className='flex items-center gap-3 text-white' >
                             <FaCoins className='text-yellow-400'/>
                             <p>Fund raised </p>
                         </div>
                         <h2 className='text-white'>{eventData?.fundCollected}</h2>
                     </div>
-
+                   
+                    
                     <div className='flex flex-col items-start justify-start gap-3'>
                         <div className='flex items-center gap-3 text-white'>
                             <SlCalender className='text-yellow-400'/>
@@ -140,6 +209,8 @@ const Events = () => {
                     <button className='rounded px-6 py-2 bg-primary_button text-white justify-end'>Raise Fund</button>
                     
                 </div>
+
+                <PaymentPopUp isOpen={showPopup} onClose={handlePopupClose}/>
 
             </div>
         </div>
@@ -185,7 +256,8 @@ const Events = () => {
                     <p className='text-white'>Bharath</p>
                     <p className='flex items-center gap-1 text-white'><FaPhoneAlt /> +91 7845425982</p>
                 </div>
-                <button className='w-full rounded px-6 py-2 bg-primary_button text-white justify-end'>Fund now!</button>
+                <button className='w-full rounded px-6 py-2 bg-primary_button text-white justify-end' onClick={()=>setShowPopup(true)}>Fund now!</button>
+                <PaymentPopUp isOpen={showPopup} onClose={handlePopupClose}/>
             </div>
         </div>
 

@@ -32,8 +32,6 @@ const createDeveloper = async (req, res) => {
       `https://profileverification-motren-ai.onrender.com/classify?developer_id=${newDeveloper._id}`
     );
     
-
-
     console.log("MlResponse",mlResponse);
     // Step 2: Return both DB and ML response
     res.status(201).json({

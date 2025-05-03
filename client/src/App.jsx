@@ -16,6 +16,7 @@ import BasicInfo from './components/profile-view/basicInfo'
 // import Accelerate from './pages/accelerate/accelerate'
 import AccelerateLayout from './components/accelerate-view/layout'
 import Events from './pages/events/events'
+import Dashboard from './pages/dashboard/dashboard'
 // import Accelerate from './pages/accelerate/accelerate'
 
 
@@ -31,7 +32,7 @@ const App = () => {
 
   if (isLoading) console.log("loading");
 
-  console.log("user",user);
+  // console.log("user",user);
 
   return (
     <div className='flex flex-col overflow-hidden bg-primary'>
@@ -54,12 +55,15 @@ const App = () => {
               <Route path='getStarted' element={<GetStarted/>}/>
           </Route>
 
-          <Route path="/main" element={
-                            <HomeLayout/>
+          <Route path="/main" element={<CheckAuth isAuthenticated={isAuthenticated} user={user}>
+            <HomeLayout/>
+          </CheckAuth>
+                            
                           }>
               <Route path='home' element={<Home/>}/>
               <Route path='accelerate' element={<AccelerateLayout/>}/>
               <Route path='event' element={<Events/>}/>
+              <Route path='dashboard' element={<Dashboard/>}/>
           </Route>
 
           <Route path='/profile' element={<CheckAuth isAuthenticated={isAuthenticated} user={user}>
@@ -69,6 +73,8 @@ const App = () => {
                 <Route path='basic' element={<BasicInfo/>}/>
               </Route>
           </Route>
+
+          
       </Routes>
     </div>
   )
