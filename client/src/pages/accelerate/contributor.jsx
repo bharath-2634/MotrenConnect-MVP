@@ -467,24 +467,10 @@ const Contributor = () => {
                   <div
                     onMouseEnter={() => setLocationHovered(true)}
                     onMouseLeave={() => setLocationHovered(false)}
-                    className="flex text-white rounded-2xl p-6 w-full items-center mr-[5rem] shadow-xl "
+                    className="flex  text-white rounded-2xl p-6 w-full items-center mr-[5rem] shadow-xl gap-[2rem]"
                   >
                     {/* Left: Text Section */}
-                    <div className="flex-1 pr-6 flex flex-col gap-6 mr-[5rem]">
-                      <h3 className="text-3xl font-bold mb-2">
-                        Participate in Events
-                      </h3>
-                      <p className="text-lg text-gray-300 mb-4">
-                        Join engaging events that connect you with like-minded
-                        individuals and meaningful causes
-                      </p>
-                      <button className="bg-[#6A5AE0] hover:bg-[#5849c9] text-white px-4 py-2 rounded-full text-lg font-medium w-fit">
-                        Join us now !
-                      </button>
-                    </div>
-      
-                    {/* Right: Map and Funding Button */}
-                    <div className="flex flex-col items-center justify-center gap-4 bg-[#b3e5fc] rounded-xl p-4 w-[17rem] h-[15rem] ">
+                    <div className="flex flex-col items-center justify-center gap-4 bg-[#b3e5fc] rounded-xl p-4 w-[17rem] h-[15rem] -ml-9">
                       <motion.img
                         src="https://cdn-icons-png.flaticon.com/512/684/684908.png"
                         alt="Map"
@@ -502,6 +488,23 @@ const Contributor = () => {
                         Fund this Event
                       </button>
                     </div>
+
+                    {/* Right side */}
+                    <div className="flex-1 pr-6 flex flex-col gap-6 ml-6">
+                      <h3 className="text-3xl font-bold mb-2">
+                        Participate in Events
+                      </h3>
+                      <p className="text-lg text-gray-300 mb-4">
+                        Join engaging events that connect you with like-minded
+                        individuals and meaningful causes
+                      </p>
+                      <button className="bg-[#6A5AE0] hover:bg-[#5849c9] text-white px-4 py-2 rounded-full text-lg font-medium w-fit">
+                        Join us now !
+                      </button>
+                    </div>
+      
+                    {/* Right: Map and Funding Button */}
+                    
                   </div>
                 </div>
               </div>

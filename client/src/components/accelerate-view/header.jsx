@@ -14,7 +14,7 @@ const AccelerateHeader = ({screen}) => {
   const {user} = useSelector((state)=>state.auth);
   // console.log("Accelerate Module",user);
   const [active,setActive] = useState("");
-  // screen(1)
+  const [openBtn,setOpenBtn] = useState("");
 
   useEffect(()=>{
     setActive(user?.role);
@@ -22,11 +22,8 @@ const AccelerateHeader = ({screen}) => {
     
   },[]);
 
-  // if(isLoading) {
-  //   return <></>
-  // }
 
-  // console.log(screen);
+
   return (
     <div className='custom-bg w-full flex flex-col items-center justify-center h-screen relative'>
 
@@ -46,10 +43,9 @@ const AccelerateHeader = ({screen}) => {
           <h2 className="text-4xl font-semibold">Accelerate your Impact</h2>
           <div className='flex w-full items-center justify-center gap-3 '>
             <div className='flex flex-col z-20 cursor-pointer' onClick={()=>screen(0)}>
-              <div className='w-30 px-6 py-3 rounded-3xl bg-sub_btn flex items-center justify-center gap-2'>
+              <div className={openBtn===1 ? 'w-30 px-6 py-3 rounded-3xl bg-sub_btn flex items-center justify-center gap-2 -translate-y-3 transition-all' : 'w-30 px-6 py-3 rounded-3xl bg-sub_btn flex items-center justify-center gap-2'} onClick={()=>{setOpenBtn(1)}}>
                   <FaUser />
-                  <h2>Subscriber</h2>
-                  
+                  <h2 className="">Subscriber</h2>
                 </div>
                 {
                     active==="subscriber" && (
@@ -62,10 +58,9 @@ const AccelerateHeader = ({screen}) => {
             </div>
 
             <div className='flex flex-col w-full h-full cursor-pointer' onClick={()=>screen(1)}>
-              <div className='w-30 px-6 py-3 rounded-3xl bg-dev_btn flex items-center justify-center gap-2'>
+              <div className={openBtn===2 ? 'w-30 px-6 py-3 rounded-3xl bg-dev_btn flex items-center justify-center gap-2 -translate-y-3 transition-all' : 'w-30 px-6 py-3 rounded-3xl bg-dev_btn flex items-center justify-center gap-2'} onClick={()=>setOpenBtn(2)}>
                   <FaCode />
                   <h2>Developer</h2>
-                  
                 </div>
                 {
                     active==="developer" && (
@@ -78,7 +73,7 @@ const AccelerateHeader = ({screen}) => {
             </div>
 
             <div className='flex flex-col cursor-pointer' onClick={()=>screen(2)}>
-              <div className='w-30 px-6 py-3 rounded-3xl bg-col_btn flex items-center justify-center gap-2'>
+              <div className={openBtn===3 ? 'w-30 px-6 py-3 rounded-3xl bg-col_btn flex items-center justify-center gap-2 -translate-y-3 transition-all' : 'w-30 px-6 py-3 rounded-3xl bg-col_btn flex items-center justify-center gap-2'} onClick={()=>setOpenBtn(3)}>
                 <RiUserShared2Fill />
                   <h2>Contributor</h2>
                 </div>
@@ -94,12 +89,6 @@ const AccelerateHeader = ({screen}) => {
               
           </div>
         </div> 
-      </div>
-
-      <div className="absolute -bottom-40 z-10 w-[90rem] flex items-center justify-center">
-        <div className="w-full opacity-90">
-          {/* <CarouselComponent /> */}
-        </div>
       </div>
     </div>
   )
