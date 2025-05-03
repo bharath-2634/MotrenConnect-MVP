@@ -11,7 +11,7 @@ const BadgeCard = () => {
     console.log(user)
 
   return (
-    <div className="bg-[#1e1f20] text-white rounded-2xl p-6 w-full h-[40%] relative shadow-md flex flex-col gap-5 font-poppins">
+    <div className="bg-[#1e1f20] text-white rounded-2xl p-6 w-full h-[100%] relative shadow-md flex flex-col gap-5 font-poppins">
       {/* Header */}
       <div className="flex justify-between items-center text-sm px-1">
         <div className="flex items-center gap-1">
