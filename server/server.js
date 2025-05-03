@@ -7,6 +7,8 @@ const authRouter = require('./routers/auth/auth-router');
 const devRouter = require('./routers/developer/developer-router');
 const conRouter = require('./routers/contributor/contributor-router');
 const eventRouter = require('./routers/events/events-router');
+const paymentRouter = require('./routers/payment/payment-router');
+require('dotenv').config();
 
 mongoose
   .connect("mongodb+srv://bharath2005:bharath2005@cluster0.0vibjmv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
@@ -40,6 +42,7 @@ app.use('/api/auth',authRouter);
 app.use('/api/developerEnroll',devRouter);
 app.use('/api/contributorEnroll',conRouter);
 app.use('/api/events',eventRouter);
+app.use('/api/payment',paymentRouter);
 
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));

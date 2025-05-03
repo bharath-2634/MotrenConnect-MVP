@@ -108,7 +108,7 @@ const Events = () => {
     };
 
     const { user, isAuthenticated, isLoading }  = useSelector((state)=>state.auth);
-    // console.log("user",user);
+    console.log("user",user);
     
     // const handleGratitudeComplete = () => {
       // const updatedUser = {
@@ -220,7 +220,16 @@ const Events = () => {
                     
                 </div>
 
-                <PaymentPopUp isOpen={showPopup} onClose={handlePopupClose}/>
+                {/* <PaymentPopUp isOpen={showPopup} onClose={handlePopupClose}/> */}
+                <PaymentPopUp
+  isOpen={showPopup}
+  onClose={(status) => {
+    handlePopupClose
+    // Optionally trigger toast or other UI updates
+  }}
+  user={user} // from Redux or props
+  amount={100} // donation amount
+/>
 
             </div>
         </div>}
