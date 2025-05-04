@@ -5,6 +5,7 @@ import Account from '../common/account';
 import { MdRocketLaunch } from "react-icons/md";
 import { IoIosAddCircle } from "react-icons/io";
 import Spline from "@splinetool/react-spline";
+import { useNavigate } from 'react-router-dom';
 
 const reviews = [
   { name: "Aarav", text: "Motren gave me purpose again. Grateful!" },
@@ -15,6 +16,9 @@ const reviews = [
 ];
 
 const HomeHeader = () => {
+
+  const navigate = useNavigate();
+
   return (
     <section className='custom-bg w-full flex flex-col items-center justify-center min-h-screen relative overflow-hidden'>
 
@@ -54,7 +58,7 @@ const HomeHeader = () => {
               <MdRocketLaunch />
               <span>Join Us</span>
             </button>
-            <button className="px-5 py-3 bg-secondary_button text-white rounded shadow hover:-translate-y-2 transition-all flex items-center gap-2">
+            <button className="px-5 py-3 bg-secondary_button text-white rounded shadow hover:-translate-y-2 transition-all flex items-center gap-2" onClick={()=>{navigate("/main/project")}}>
               <IoIosAddCircle />
               <span>Book Now</span>
             </button>

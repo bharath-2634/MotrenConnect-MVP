@@ -17,6 +17,7 @@ import BasicInfo from './components/profile-view/basicInfo'
 import AccelerateLayout from './components/accelerate-view/layout'
 import Events from './pages/events/events'
 import Dashboard from './pages/dashboard/dashboard'
+import ProjectForm from './pages/project/projectForm'
 // import Accelerate from './pages/accelerate/accelerate'
 
 
@@ -64,6 +65,7 @@ const App = () => {
               <Route path='accelerate' element={<AccelerateLayout/>}/>
               <Route path='event' element={<Events/>}/>
               <Route path='dashboard' element={<Dashboard/>}/>
+              <Route path='project' element={<ProjectForm/>}/>
           </Route>
 
           <Route path='/profile' element={<CheckAuth isAuthenticated={isAuthenticated} user={user}>

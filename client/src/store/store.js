@@ -3,6 +3,7 @@ import authReducer from "./auth-slice";
 import developerReducer from "./dev-slice";
 import contributorReducer from "./con-slice";
 import eventReducer from "./event-slice";
+import projectReducer from "./project-slice";
 
 
 const store = configureStore({
@@ -10,7 +11,8 @@ const store = configureStore({
         auth : authReducer,
         developerEnroll : developerReducer,
         contributorEnroll : contributorReducer,
-        event : eventReducer
+        event : eventReducer,
+        project : projectReducer
     }
 })
 

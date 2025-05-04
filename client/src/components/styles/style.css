@@ -4,6 +4,13 @@
   background-position: center;
 }
 
+.project-bg {
+  background-image : url('../../assets/projectFormBg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity : 0.8;
+}
+
 /* #myVideo {
   position: fixed;
   right: 0;

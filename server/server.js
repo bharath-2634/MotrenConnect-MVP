@@ -8,6 +8,8 @@ const devRouter = require('./routers/developer/developer-router');
 const conRouter = require('./routers/contributor/contributor-router');
 const eventRouter = require('./routers/events/events-router');
 const paymentRouter = require('./routers/payment/payment-router');
+const projectRouter = require('./routers/project/project-router');
+
 require('dotenv').config();
 
 mongoose
@@ -43,6 +45,7 @@ app.use('/api/developerEnroll',devRouter);
 app.use('/api/contributorEnroll',conRouter);
 app.use('/api/events',eventRouter);
 app.use('/api/payment',paymentRouter);
+app.use('/api/project',projectRouter);
 
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
