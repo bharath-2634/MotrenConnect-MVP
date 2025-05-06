@@ -60,7 +60,7 @@ export const loginUser = createAsyncThunk(
 export const googleLogin = createAsyncThunk(
   "auth/google",
   async (token) => {
-    // console.log("Slice Enter", token);
+    console.log("Slice Enter", token);
     
     const response = await axios.post(
       "http://localhost:5000/api/auth/google",  // ✅ Corrected endpoint
@@ -68,7 +68,7 @@ export const googleLogin = createAsyncThunk(
       { withCredentials: true }
     );
 
-    console.log("slice", response.data);
+    console.log("slice", response);
     const data = response.data;
     if(data.success) {
       localStorage.setItem("token",data.token);

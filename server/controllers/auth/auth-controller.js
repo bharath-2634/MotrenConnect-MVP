@@ -160,6 +160,8 @@ const loginUser = async (req, res) => {
 const googleAuth = async (req, res) => {
     try {
         const { token } = req.body;
+        console.log("token",token);
+
         if (!token) {
             return res.status(400).json({ success: false, message: "Token is required" });
         }
@@ -169,8 +171,10 @@ const googleAuth = async (req, res) => {
         // Verify the Google token
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: process.env.GOOGLE_CLIENT_SECRET,
+            audience: "997407954891-15midcdg8c555ds9hrbd3emjbtam5pv5.apps.googleusercontent.com",
         });
+
+        console.log("ticket",ticket);
 
         const payload = ticket.getPayload();
         // console.log("Google Payload:", payload);
@@ -197,6 +201,8 @@ const googleAuth = async (req, res) => {
             await user.save();
         }
 
+        console.log("user",user);
+
         const jwtToken = jwt.sign(
           {
               userName: payload.family_name || "",
@@ -208,6 +214,7 @@ const googleAuth = async (req, res) => {
           "CLIENT_SECRET_KEY",
           { expiresIn: "7d" }
       );
+
       res.cookie("token", jwtToken, { httpOnly: true, secure: false }).json({
         success: true,
         message: "Google login successful",
