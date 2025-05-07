@@ -9,15 +9,15 @@ import {
   } from "recharts";
 
   const data = [
-    { x: 0, a: 3.4, b: 4.1 },
-    { x: 1, a: 2.1, b: 3.2 },
-    { x: 2, a: 3.9, b: 2.4 },
-    { x: 3, a: 5.7, b: 3.0 },
-    { x: 4, a: 4.2, b: 6.1 },
-    { x: 5, a: 6.0, b: 4.5 },
-    { x: 6, a: 4.8, b: 4.0 },
-    { x: 7, a: 3.7, b: 4.3 },
-    { x: 8, a: 3.0, b: 4.1 },
+    { x: 0, project: 3.4, funding: 4.1 },
+    { x: 1, project: 2.1, funding: 3.2 },
+    { x: 2, project: 3.9, funding: 2.4 },
+    { x: 3, project: 5.7, funding: 3.0 },
+    { x: 4, project: 4.2, funding: 6.1 },
+    { x: 5, project: 6.0, funding: 4.5 },
+    { x: 6, project: 4.8, funding: 4.0 },
+    { x: 7, project: 3.7, funding: 4.3 },
+    { x: 8, project: 3.0, funding: 4.1 },
   ];
 
 const GraphCard = () => {
@@ -43,14 +43,14 @@ const GraphCard = () => {
             />
             <Line
               type="monotone"
-              dataKey="a"
+              dataKey="project"
               stroke="#34d399"          /* emerald‑400 */
               strokeWidth={4}
               dot={false}
             />
             <Line
               type="monotone"
-              dataKey="b"
+              dataKey="funding"
               stroke="#0ea5e9"          /* sky‑500 */
               strokeWidth={4}
               dot={false}

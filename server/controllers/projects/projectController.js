@@ -39,4 +39,38 @@ const createProject = async (req, res) => {
   }
 };
 
-module.exports = { createProject };
+const getProjects = async (req,res) => {
+
+  const { id: userId } = req.params;
+
+  try {
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "userId required for getting Project List!",
+      });
+    }
+
+    const projects = await Project.find({ userId: userId });
+    console.log(projects);
+    if (!projects) {
+      return res.status(201).json({
+        success: false,
+        message: "No Projects found",
+      });
+    }
+
+    return res.json({
+      success: true,
+      projects,
+      message: "Projects Found for the User !",
+    });
+
+  }catch(error) {
+    console.error("Error submitting Contributor details:", error);
+    res.status(500).json({ message: "Server error", error });
+  }
+}
+
+module.exports = { createProject , getProjects};
