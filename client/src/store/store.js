@@ -4,7 +4,7 @@ import developerReducer from "./dev-slice";
 import contributorReducer from "./con-slice";
 import eventReducer from "./event-slice";
 import projectReducer from "./project-slice";
-// import postReducer from "./post-slice";
+import postReducer from "./post-slice";
 
 
 const store = configureStore({
@@ -14,7 +14,7 @@ const store = configureStore({
         contributorEnroll : contributorReducer,
         event : eventReducer,
         project : projectReducer,
-        // posts : postReducer
+        linkedin : postReducer
     }
 })
 

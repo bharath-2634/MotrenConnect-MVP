@@ -1,20 +1,30 @@
-// const scrapeLinkedInPosts = require('../../config/linkedinscrap');
-// require('dotenv').config();
+const fs = require('fs');
+const csv = require('csv-parser');
+// import csv from "../../config/Profile.csv";
 
-// const EMAIL = process.env.LINKEDIN_EMAIL;
-// const PASSWORD = process.env.LINKEDIN_PASSWORD;
+const getLinkedInPostsFromFile = async (req, res) => {
+  const results = [];
+  const filePath = '../../config/Profile.csv'; // Adjust the path
 
-// const getLinkedInPosts = async (req, res) => {
-//   try {
-//     console.log("Entered");
-//     const posts = await scrapeLinkedInPosts(EMAIL, PASSWORD);
-//     console.log("posts",posts);
-//     res.status(200).json(posts);
-//   } catch (error) {
-//     console.error('Scraping failed:', error);  // 🔍 Print the exact error
-//     res.status(500).json({ message: 'Scraping failed', error: error.message });
-//   }
-// };
+  fs.createReadStream(filePath)
+    .pipe(csv())
+    .on('data', (data) => {
+      // Adjust how you structure the data based on your CSV columns
+      results.push({
+        text: data.text,
+        timestamp: new Date(data.timestamp),
+        // Add other fields as needed
+      });
+    })
+    .on('end', () => {
+      res.json(results);
+    })
+    .on('error', (error) => {
+      console.error('Error reading or parsing CSV:', error);
+      res.status(500).json({ message: 'Error reading LinkedIn data' });
+    });
 
+    console.log("Results : "+results);
+};
 
-// module.exports = { getLinkedInPosts };
+module.exports = { getLinkedInPostsFromFile };

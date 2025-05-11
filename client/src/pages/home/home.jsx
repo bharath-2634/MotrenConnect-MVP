@@ -18,18 +18,18 @@ import { SlCalender } from "react-icons/sl";
 import PaymentPopUp from '@/components/event-view/paymentPopUp'
 import Faq from '@/components/common/faq'
 import Footer from '@/components/common/footer'
-// import { fetchLinkedInPosts } from '@/store/post-slice'
+import { fetchLinkedInPosts } from '@/store/post-slice'
 import noEvent from "../../assets/noEvents.gif";
 
 const Home = () => {
 
     const dispatch = useDispatch();
 
-    // const {posts} = useSelector((state)=>state.posts);
-    // console.log("posts",posts);
+    const {posts} = useSelector((state)=>state.linkedin);
+    console.log("posts",posts);
 
     useEffect(()=>{
-      // dispatch(fetchLinkedInPosts()).then(()=>console.log("Successful webscrapping !")).catch((error)=>console.log("error !"));
+      dispatch(fetchLinkedInPosts()).then(()=>console.log("Successful webscrapping !")).catch((error)=>console.log("error !"));
     },[]);
 
     const [eventData,setEventData] = useState();

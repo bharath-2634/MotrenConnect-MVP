@@ -1,7 +1,8 @@
-// const express = require('express');
-// const router = express.Router();
-// const { getLinkedInPosts } = require('../../controllers/post/linkedinPostController');
+const express = require('express');
+const router = express.Router();
+const linkedInPostController = require('../../controllers/post/linkedinPostController');
 
-// router.get('/linkedin-posts', getLinkedInPosts);
+// Route to get LinkedIn posts by reading the CSV file
+router.get('/linkedin/posts', linkedInPostController.getLinkedInPostsFromFile);
 
-// module.exports = router;
+module.exports = router;
