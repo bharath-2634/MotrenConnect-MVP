@@ -4,6 +4,7 @@ import developerReducer from "./dev-slice";
 import contributorReducer from "./con-slice";
 import eventReducer from "./event-slice";
 import projectReducer from "./project-slice";
+// import postReducer from "./post-slice";
 
 
 const store = configureStore({
@@ -12,7 +13,8 @@ const store = configureStore({
         developerEnroll : developerReducer,
         contributorEnroll : contributorReducer,
         event : eventReducer,
-        project : projectReducer
+        project : projectReducer,
+        // posts : postReducer
     }
 })
 

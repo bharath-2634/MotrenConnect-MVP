@@ -9,6 +9,8 @@ const conRouter = require('./routers/contributor/contributor-router');
 const eventRouter = require('./routers/events/events-router');
 const paymentRouter = require('./routers/payment/payment-router');
 const projectRouter = require('./routers/project/project-router');
+// const postRouter = require('./routers/post/linkedinPostRouter');
+
 
 require('dotenv').config();
 
@@ -46,6 +48,8 @@ app.use('/api/contributorEnroll',conRouter);
 app.use('/api/events',eventRouter);
 app.use('/api/payment',paymentRouter);
 app.use('/api/project',projectRouter);
+// app.use('/api/posts',postRouter);
+
 
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));

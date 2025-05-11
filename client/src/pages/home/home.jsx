@@ -16,11 +16,21 @@ import { MdLocationPin } from "react-icons/md";
 import { FaCoins } from "react-icons/fa6";
 import { SlCalender } from "react-icons/sl";
 import PaymentPopUp from '@/components/event-view/paymentPopUp'
-
+import Faq from '@/components/common/faq'
+import Footer from '@/components/common/footer'
+// import { fetchLinkedInPosts } from '@/store/post-slice'
+import noEvent from "../../assets/noEvents.gif";
 
 const Home = () => {
 
     const dispatch = useDispatch();
+
+    // const {posts} = useSelector((state)=>state.posts);
+    // console.log("posts",posts);
+
+    useEffect(()=>{
+      // dispatch(fetchLinkedInPosts()).then(()=>console.log("Successful webscrapping !")).catch((error)=>console.log("error !"));
+    },[]);
 
     const [eventData,setEventData] = useState();
     const [showPopup, setShowPopup] = useState(false);
@@ -110,95 +120,99 @@ const Home = () => {
               <GraphCard/>
             </div>
           </div>
-          {/* Events Card and Section on the front */}
-          <div className='flex flex-col mt-10 p-6 items-center justify-center gap-3'>
-
-            <h2 className='text-white font-semibold font-poppins text-[1.6rem]'>Join us on the Special Event</h2>
-            {
-              eventData==="No active event found" && 
-              <div className='flex flex-col w-full items-center justify-center gap-0 p-6'>
-                <img src={noEvent} alt="MotrenConnect" className='w-[15rem]'/>
-                <h2 className='text-white'>No event active now ! stay active</h2>
-              </div>
-            }
-            { eventData!="No active event found" && 
-              <div className='w-[90%] bg-primary_box rounded flex items-center justify-center gap-10 p-3 mt-10'>
-              {/* Image Gallary */}
-              <div className=''>
-                  <ImageSlider images={images}/>
-              </div>
-              <div className='flex flex-col items-start justify-center gap-3 w-[70%]'>
-                  <h2 className='text-white text-[1.2rem] font-medium'>{eventData?.eventName}</h2>
-                  <p className='text-[1rem] text-gray-400'>{eventData?.eventDescription}</p>
-                  <div className='flex items-center justify-between gap-3 mt-3 w-full'>
-                      <p className='flex items-center gap-3 text-white'><span><MdLocationPin className='text-red-600'/></span> {eventData?.eventLocation}</p>
-                      <button className='rounded px-6 py-2 bg-primary_button text-white justify-end' onClick={()=>openMap()}>Open Map</button>
-                  </div>
-                  {/* Progress Bar */}
-                  <div className="w-full flex flex-col gap-2 mt-4">
-                      <div className="flex justify-between text-white text-sm">
-                          <span>Raised: ₹{eventData?.fundCollected || 0}</span>
-                          <span>Goal: ₹{eventData?.targetFund || 0}</span>
-                      </div>
-                      <div className="w-full h-4 bg-gray-700 rounded-full overflow-hidden">
-                          <div
-                              className="h-full bg-green-500 transition-all duration-500"
-                              style={{
-                                  width: `${
-                                      eventData?.fundCollected && eventData?.targetFund
-                                          ? Math.min(
-                                              (parseFloat(eventData.fundCollected) /
-                                                  parseFloat(eventData.targetFund)) *
-                                                  100,
-                                              100
-                                          )
-                                          : 0
-                                  }%`,
-                              }}
-                          ></div>
-                      </div>
-                  </div>
-                  {/* Last section */}
-                  <div className='w-full flex items-center justify-between gap-4 mt-5'  onClick={() => setShowPopup(true)}>
-                      <div className='flex flex-col items-start justify-start gap-3' onClick={() => console.log("Clicked")}>
-                          <div className='flex items-center gap-3 text-white' >
-                              <FaCoins className='text-yellow-400'/>
-                              <p>Fund raised </p>
-                          </div>
-                          <h2 className='text-white'>{eventData?.fundCollected}</h2>
-                      </div>
-                    
-                      
-                      <div className='flex flex-col items-start justify-start gap-3'>
-                          <div className='flex items-center gap-3 text-white'>
-                              <SlCalender className='text-yellow-400'/>
-                              <p>Days left</p>
-                          </div>
-                          <h2 className='text-white'>{getDaysRemaining()}</h2>
-                      </div>
-
-                      <button className='rounded px-6 py-2 bg-primary_button text-white justify-end'>Raise Fund</button>
-                      
-                  </div>
-
-                  {/* <PaymentPopUp isOpen={showPopup} onClose={handlePopupClose}/> */}
-                  <PaymentPopUp
-                    isOpen={showPopup}
-                    onClose={(status) => {
-                      handlePopupClose(status)
-                      // Optionally trigger toast or other UI updates
-                    }}
-                    user={user} // from Redux or props
-                    amount={100} // donation amount
-                  />
-
-                  </div>
-              </div>
-            }
-          </div>
-          
-          
         </div>
+        {/* Events Card and Section on the front */}
+        <div className='flex flex-col mt-10 p-6 items-center justify-center gap-3'>
+
+<h2 className='text-white font-semibold font-poppins text-[1.6rem]'>Join us on the Special Event</h2>
+{
+  eventData==="No active event found" && 
+  <div className='flex flex-col w-full items-center justify-center gap-0 p-6'>
+    <img src={noEvent} alt="MotrenConnect" className='w-[15rem]'/>
+    <h2 className='text-white'>No event active now ! stay active</h2>
+  </div>
+}
+{ eventData!="No active event found" && 
+  <div className='w-[90%] bg-primary_box rounded flex items-center justify-center gap-10 p-3 mt-10'>
+  {/* Image Gallary */}
+  <div className=''>
+      <ImageSlider images={images}/>
+  </div>
+  <div className='flex flex-col items-start justify-center gap-3 w-[70%]'>
+      <h2 className='text-white text-[1.2rem] font-medium'>{eventData?.eventName}</h2>
+      <p className='text-[1rem] text-gray-400'>{eventData?.eventDescription}</p>
+      <div className='flex items-center justify-between gap-3 mt-3 w-full'>
+          <p className='flex items-center gap-3 text-white'><span><MdLocationPin className='text-red-600'/></span> {eventData?.eventLocation}</p>
+          <button className='rounded px-6 py-2 bg-primary_button text-white justify-end' onClick={()=>openMap()}>Open Map</button>
+      </div>
+      {/* Progress Bar */}
+      <div className="w-full flex flex-col gap-2 mt-4">
+          <div className="flex justify-between text-white text-sm">
+              <span>Raised: ₹{eventData?.fundCollected || 0}</span>
+              <span>Goal: ₹{eventData?.targetFund || 0}</span>
+          </div>
+          <div className="w-full h-4 bg-gray-700 rounded-full overflow-hidden">
+              <div
+                  className="h-full bg-green-500 transition-all duration-500"
+                  style={{
+                      width: `${
+                          eventData?.fundCollected && eventData?.targetFund
+                              ? Math.min(
+                                  (parseFloat(eventData.fundCollected) /
+                                      parseFloat(eventData.targetFund)) *
+                                      100,
+                                  100
+                              )
+                              : 0
+                      }%`,
+                  }}
+              ></div>
+          </div>
+      </div>
+      {/* Last section */}
+      <div className='w-full flex items-center justify-between gap-4 mt-5'  onClick={() => setShowPopup(true)}>
+          <div className='flex flex-col items-start justify-start gap-3' onClick={() => console.log("Clicked")}>
+              <div className='flex items-center gap-3 text-white' >
+                  <FaCoins className='text-yellow-400'/>
+                  <p>Fund raised </p>
+              </div>
+              <h2 className='text-white'>{eventData?.fundCollected}</h2>
+          </div>
+        
+          
+          <div className='flex flex-col items-start justify-start gap-3'>
+              <div className='flex items-center gap-3 text-white'>
+                  <SlCalender className='text-yellow-400'/>
+                  <p>Days left</p>
+              </div>
+              <h2 className='text-white'>{getDaysRemaining()}</h2>
+          </div>
+
+          <button className='rounded px-6 py-2 bg-primary_button text-white justify-end'>Raise Fund</button>
+          
+      </div>
+
+      {/* <PaymentPopUp isOpen={showPopup} onClose={handlePopupClose}/> */}
+      <PaymentPopUp
+        isOpen={showPopup}
+        onClose={(status) => {
+          handlePopupClose(status)
+          // Optionally trigger toast or other UI updates
+        }}
+        user={user} // from Redux or props
+        amount={100} // donation amount
+      />
+
+      </div>
+  </div>
+}
+        </div>  
+        {/* Faq Section */}
+        <div className='w-full flex flex-col items-center justify-center gap-3 mt-10'>
+        <h2 className='text-white font-semibold font-poppins text-[1.6rem]'>Frequently asked question</h2>
+          <Faq/>
+        </div>
+        <Footer/>
     </div>
   )
 }

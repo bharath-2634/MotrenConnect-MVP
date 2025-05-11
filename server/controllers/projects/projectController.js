@@ -14,7 +14,7 @@ const createProject = async (req, res) => {
       isMentorshipProject
     } = req.body;
 
-    console.log("data",req.body);
+    // console.log("data",req.body);
     const newProject = new Project({
         userId,
         title,
