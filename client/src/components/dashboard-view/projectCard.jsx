@@ -9,7 +9,7 @@ const ProjectCard = () => {
   return (
     <div>
 
-<div className="rounded-3xl bg-zinc-800/60 backdrop-blur-md p-6 text-center text-zinc-100 flex flex-col items-center font-poppins">
+<div className="rounded-2xl bg-zinc-800/60 backdrop-blur-md p-6 text-center text-zinc-100 flex flex-col items-center font-poppins">
       <h3 className="text-xl font-medium">Motren Awaits!</h3>
       <p className="text-sm text-indigo-400 mt-1">
         Earn rewards while making a difference

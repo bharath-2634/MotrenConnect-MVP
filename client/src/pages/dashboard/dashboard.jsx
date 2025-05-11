@@ -5,10 +5,13 @@ import BadgeCard from '@/components/dashboard-view/badgeCard'
 import GraphCard from '@/components/dashboard-view/graphCard'
 import ProfileCard from '@/components/dashboard-view/profileCard'
 import ProjectCard from '@/components/dashboard-view/projectCard'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import rotatingMail from "../../assets/rotating-coin.gif";
+import { fetchProjectsByUser } from '@/store/project-slice';
+import devImg from "../../assets/User_img.png";
+import Footer from '@/components/common/footer'
 
 const Dashboard = () => {
 
@@ -35,34 +38,105 @@ const Dashboard = () => {
         
     ];
 
+    const { project } = useSelector((state) => state.project);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const userId = user?.userId;
+        if (userId) {
+          dispatch(fetchProjectsByUser(userId))
+            .then(() => console.log("Fetched Successfully!"))
+            .catch((error) => console.log(error));
+        }
+      }, [dispatch, user]);
+
+      console.log("projects from dashboard",project[0]);
+
+      const getDaysRemaining = (project) => {
+          if (!project?.submissionDate) return null;
+
+          const today = new Date();
+          const projectDate = new Date(project?.submissionDate);
+
+          const diffTime = projectDate.getTime() - today.getTime();
+
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+          return diffDays > 0 ? `${diffDays} days left` : "Delivery today!";
+      };
+
   return (
-    <div className='w-full flex flex-col items-center justify-center gap-4'>
-        <BottomNav/>
+    <div className='w-full flex flex-col items-center justify-center gap-4 font-poppins'>
+        {/* <BottomNav/> */}
         <Account/>
         <div className='w-full flex items-start justify-start mt-6 ml-10'>
             <FaChevronLeft onClick={()=>history.back()} className='text-white '/>
         </div>
         <div className='flex items-center justify-center gap-3 w-full p-4'>
-            {/* First Dashboard */}
-            <div className='grid grid-cols-[1fr_1fr_1fr] gap-6 w-full'>
-                <div className='w-full'>
-                    <ProfileCard/>
-                </div>
-                
-                <div className='flex flex-col gap-4 w-full' >
-                    <div onClick={()=>setShowEnvelop(true)}>
-                        <BadgeCard/>
-                    </div>
-                    
-                    <AddInvestment/>
-                </div>
-
-                <div className='flex flex-col items-center gap-6'>
-                    <ProjectCard/>
-                    <GraphCard/>
-                </div>
+          
+            <div className='w-[30%]'>
+                <ProfileCard/>
             </div>
+            <div className='w-[70%] flex flex-col items-center justify-center gap-3 '>
+              <div className='w-full flex items-center justify-between gap-4'>
+                  <div onClick={()=>setShowEnvelop(true)} className='w-[60%]'>
+                      <BadgeCard/>
+                  </div>
+                  <AddInvestment/>
+              </div>
+              <div className='w-full flex items-center justify-between gap-4'>
+                  <ProjectCard/>
+                  <GraphCard/>
+              </div>
+              <div className='w-full h-[8rem] flex flex-col items-start justify-start gap-3 mb-16'>
+                {/* <h2 className='text-[1.1rem] text-white font-medium'>Current Project !</h2> */}
+                {project[0] && <div className='bg-primary_box rounded flex flex-col text-white w-full p-6 gap-4'>
+                  <div className='flex items-center justify-between gap-3 w-full'>
+                    <h2 className='text-[1.2rem] font-medium'>{project[0].title}</h2>
+                    <p>{getDaysRemaining(project[0])}</p>
+                  </div>
+                  <p className='text-[.8rem] text-gray-400'>{project[0].description} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere voluptatum amet fugiat iure ab dicta possimus corporis, saepe ratione obcaecati.</p>
+                  <div className='w-full flex items-center justify-between gap-4'>
+                    <div className='w-full flex  items-start justify-start gap-3 mt-2 text-[.8rem]'>
+                      <h2 className=''>Progress : </h2>
+                      {
+                        project[0].metadata.status==="waiting" ? 
+                        (<>Not yet confirmed !</>) : (
+                          <div className="w-full h-4 bg-gray-700 rounded-full overflow-hidden">
+                            <div
+                                className="h-full bg-green-500 transition-all duration-500"
+                                style={{
+                                    width: `${
+                                        project[0]?.progress && project[0]?.fullProgress
+                                            ? Math.min(
+                                                (parseFloat(project[0].progress) /
+                                                    parseFloat(project[0].fullProgress)) *
+                                                    100,
+                                                100
+                                            )
+                                            : 0
+                                    }%`,
+                                }}
+                            ></div>
+                        </div>
+                        )
+                      }
+                    </div>
+                    <div className='flex items-center justify-center gap-3'>
+                      <img src={devImg} alt="" className='w-[5rem]'/>
+                      <a className='bg-primary_button text-white px-6 py-2 rounded' href='www.google.com'>Join!</a>
+                    </div>
+                  </div>
+                  
+                </div>}
+                {/* <div className=' w-full h-[2rem]'>
+                  h2 name
+                </div> */}
+              </div>
+            </div>
+            
         </div>
+        
         {showEnvelop && (
                 <div className='fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-[9999]'>
                   <div className='bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-2xl relative w-[90%] max-w-[600px] max-h-[80%] overflow-auto'>
@@ -145,6 +219,8 @@ const Dashboard = () => {
                     )}
                 </div>
               )}
+
+              <Footer/>
 
         
     </div>

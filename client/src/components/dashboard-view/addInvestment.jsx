@@ -14,7 +14,7 @@ const AddInvestment = () => {
 
   return (
     <div>
-      <div className="rounded-3xl bg-zinc-800/60 backdrop-blur-md p-6 text-center text-zinc-100 flex flex-col items-center font-poppins">
+      <div className="rounded-2xl bg-zinc-800/60 backdrop-blur-md p-6 text-center text-zinc-100 flex flex-col items-center font-poppins">
         <h3 className="text-[1rem] font-medium">
           Turn your investment into a better tomorrow
         </h3>
