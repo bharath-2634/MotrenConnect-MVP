@@ -23,10 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
-*.gif
+# *.gif
 *.env
 *.secret
-*.gif
+# *.gif
 *.env
-*.mp4
-*.mov
+# *.mp4
+# *.mov
