@@ -10,7 +10,7 @@ const initialState = {
 export const fetchLinkedInPosts = createAsyncThunk(
     'linkedin/fetchPosts',
     async () => {
-        const response = await axios.get('http://localhost:5000/api/posts/linkedin-posts');
+        const response = await axios.get('https://motrenconnect-mvp.onrender.com/api/posts/linkedin-posts');
         return response.data;
     }
 );

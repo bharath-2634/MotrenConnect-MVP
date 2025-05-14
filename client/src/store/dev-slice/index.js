@@ -14,7 +14,7 @@ export const submitDeveloper = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/developerEnroll/submit",
+        "https://motrenconnect-mvp.onrender.com/api/developerEnroll/submit",
         formData,
         { withCredentials: true }
       );

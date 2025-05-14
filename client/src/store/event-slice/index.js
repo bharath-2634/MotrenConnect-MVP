@@ -13,7 +13,7 @@ export const fetchActiveEvent = createAsyncThunk(
   "events/fetchActiveEvent",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("http://localhost:5000/api/events/active-event", {
+      const response = await axios.get("https://motrenconnect-mvp.onrender.com/api/events/active-event", {
         withCredentials: true,
       });
       return response.data.event; // We only return the event object

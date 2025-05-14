@@ -30,7 +30,7 @@ export const registerUser = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
       try {
           const response = await axios.post(
-              "http://localhost:5000/api/auth/register",
+              "https://motrenconnect-mvp.onrender.com/api/auth/register",
               formData,
               { withCredentials: true }
           );
@@ -46,7 +46,7 @@ export const loginUser = createAsyncThunk(
   "/auth/login",
   async (formData) => {
     const response = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      "https://motrenconnect-mvp.onrender.com/api/auth/login",
       formData,
       {
         withCredentials: true,
@@ -63,7 +63,7 @@ export const googleLogin = createAsyncThunk(
     console.log("Slice Enter", token);
     
     const response = await axios.post(
-      "http://localhost:5000/api/auth/google",  // ✅ Corrected endpoint
+      "https://motrenconnect-mvp.onrender.com/api/auth/google",  // ✅ Corrected endpoint
       { token }, // Send token inside request body
       { withCredentials: true }
     );
@@ -82,7 +82,7 @@ export const logoutUser = createAsyncThunk(
 
   async () => {
     const response = await axios.post(
-      "http://localhost:5000/api/auth/logout",
+      "https://motrenconnect-mvp.onrender.com/api/auth/logout",
       {},
       {
         withCredentials: true,
@@ -104,7 +104,7 @@ export const checkAuth = createAsyncThunk(
 
   async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/auth/check-auth",
+      "https://motrenconnect-mvp.onrender.com/api/auth/check-auth",
       {
         withCredentials: true,
         headers: {
@@ -123,7 +123,7 @@ export const fetchUserById = createAsyncThunk(
   async (userId, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/auth/user/${userId}`,
+        `https://motrenconnect-mvp.onrender.com/api/auth/user/${userId}`,
         { withCredentials: true }
       );
       return response.data;
@@ -138,7 +138,7 @@ export const updateUserProfile = createAsyncThunk(
   async (updatedUser, { rejectWithValue }) => {
     try {
       const response = await axios.put(
-        "http://localhost:5000/api/auth/updateUser",
+        "https://motrenconnect-mvp.onrender.com/api/auth/updateUser",
         { user: updatedUser },
         { withCredentials: true }
       );
