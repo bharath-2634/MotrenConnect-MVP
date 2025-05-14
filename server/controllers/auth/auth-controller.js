@@ -69,7 +69,7 @@ const registerUser = async (req, res) => {
             { expiresIn: "7d" }
         );
 
-        res.cookie("token", token, { httpOnly: true, secure: false });
+        res.cookie("token", token, { httpOnly: true, secure: true });
 
         res.status(200).json({
             success: true,
@@ -135,7 +135,7 @@ const loginUser = async (req, res) => {
             { expiresIn: "7d" }
         );
 
-        res.cookie("token", token, { httpOnly: true, secure: false }).json({
+        res.cookie("token", token, { httpOnly: true, secure: true }).json({
             success: true,
             message: "Logged in successfully",
             user: {
@@ -215,7 +215,7 @@ const googleAuth = async (req, res) => {
           { expiresIn: "7d" }
       );
 
-      res.cookie("token", jwtToken, { httpOnly: true, secure: false }).json({
+      res.cookie("token", jwtToken, { httpOnly: true, secure: true }).json({
         success: true,
         message: "Google login successful",
         token: jwtToken,
