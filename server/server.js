@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
     cors({
-      origin: "https://motrenconnect-mvp.onrender.com",
+      origin: "https://motren-connect-mvp.vercel.app",
       methods: ["GET", "POST", "DELETE", "PUT"],
       allowedHeaders: [
         "Content-Type",
