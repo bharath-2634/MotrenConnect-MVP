@@ -66,6 +66,20 @@ Motren Connect contributes toward the UN Sustainable Development Goals:
 # Clone the repo
 git clone https://github.com/bharath-2634/MotrenConnect-MVP.git
 ```
+## Environment Variables
+*Create a **.env** file in the server folder and provide the following variables:*
+
+   GOOGLE_CLIENT_SECRET = your-secret-id;
+   GOOGLE_OAUTH = your-oauth-id;
+   CONNECTION_URL = your-mongoDb-connection-url;
+
+   CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+   CLOUDINARY_API_KEY=your-cloudinary-api-key
+   CLOUDINARY_API_SECRET=your-cloudinary-api-secret
+
+   RAZORPAY_KEY_ID = your-razorpay-key-id
+   RAZORPAY_SECRET = your-razorpay-secret-id
+
 
 # Install dependencies
 ```bash
