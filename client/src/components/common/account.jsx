@@ -74,10 +74,29 @@ const Account = () => {
         from : {
           name : "Motren-Team"
         },
-        content : "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+        content : `Dear ${user?.userName},\n Thank you for choosing MotrenConnect — a platform where your freelance journey does more than just build careers; it builds lives. By joining us, you’re not only embracing new opportunities for your own growth but also becoming a vital part of a mission that reaches far beyond the screen. \n Every project you take on through MotrenConnect directly supports orphaned children, giving them access to better education, care, and a brighter future. \n Your trust in our platform means the world to us — and even more to the children whose lives you help change every day. Together, we are proving that work can be purposeful, and that talent, when shared with heart, creates impact that lasts a lifetime. We’re excited to have you with us on this meaningful journey. \n With heartfelt thanks,\nThe MotrenConnect Team \nEmpowering Work. Changing Lives.`
+    } }, 
+    
+    { id: 2, message: {
+        to : {
+          name : user?.userName,
+          MCID : user?.MCID
+        },
+        from : {
+          name : "Motren-Team"
+        },
+        content : `Dear ${user?.userName},\n Thank you for choosing MotrenConnect — a platform where your freelance journey does more than just build careers; it builds lives. By joining us, you’re not only embracing new opportunities for your own growth but also becoming a vital part of a mission that reaches far beyond the screen. \n Every project you take on through MotrenConnect directly supports orphaned children, giving them access to better education, care, and a brighter future. \n Your trust in our platform means the world to us — and even more to the children whose lives you help change every day. Together, we are proving that work can be purposeful, and that talent, when shared with heart, creates impact that lasts a lifetime. We’re excited to have you with us on this meaningful journey. \n With heartfelt thanks,\nThe MotrenConnect Team \nEmpowering Work. Changing Lives.`
     } },
-    { id: 2, message: "A crown for your consistency 👑 Keep shining!" },
-    { id: 3, message: "Just a reminder: You're making great progress 🚀" },
+   { id: 3, message: {
+        to : {
+          name : user?.userName,
+          MCID : user?.MCID
+        },
+        from : {
+          name : "Motren-Team"
+        },
+        content : `Dear ${user?.userName},\n Thank you for choosing MotrenConnect — a platform where your freelance journey does more than just build careers; it builds lives. By joining us, you’re not only embracing new opportunities for your own growth but also becoming a vital part of a mission that reaches far beyond the screen. \n Every project you take on through MotrenConnect directly supports orphaned children, giving them access to better education, care, and a brighter future. \n Your trust in our platform means the world to us — and even more to the children whose lives you help change every day. Together, we are proving that work can be purposeful, and that talent, when shared with heart, creates impact that lasts a lifetime. We’re excited to have you with us on this meaningful journey. \n With heartfelt thanks,\nThe MotrenConnect Team \nEmpowering Work. Changing Lives.`
+    } },
     
   ];
 
